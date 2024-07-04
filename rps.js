@@ -36,6 +36,12 @@ function winStatus(human, computer){
 
 function playRound(){
     let human = getHumanChoice();
+    human = human.toLowerCase();
+    if (human != "rock" && human != 'paper' && human != 'scissors'){
+        alert("Invalid Entry TRY AGAIN!")
+        playRound();
+        return
+    }
     let computer = getComputerChoice();    
 
     console.log(
