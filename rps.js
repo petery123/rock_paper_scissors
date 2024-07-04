@@ -14,7 +14,7 @@ function getComputerChoice(){
 
 function getHumanChoice(){
     let choice = prompt("Enter 'rock' 'paper' or 'scissors'");
-    return choice;
+    return choice.toLowerCase();
 }
 
 function winStatus(human, computer){
@@ -36,7 +36,6 @@ function winStatus(human, computer){
 
 function playRound(){
     let human = getHumanChoice();
-    human = human.toLowerCase();
     if (human != "rock" && human != 'paper' && human != 'scissors'){
         alert("Invalid Entry TRY AGAIN!")
         playRound();
