@@ -17,22 +17,26 @@ function getHumanChoice(){
     return choice;
 }
 
+function winStatus(human, computer){
+    switch (`${human}_${computer}`) {
+        case 'rock_scissors':
+        case 'paper_rock':
+        case 'scissors_paper':
+            return true;
+        default:
+            computerScore ++;
+            return false;
+    }
+}
+
 function playRound(){
     let human = getHumanChoice();
     let computer = getComputerChoice();
     let status = "win";
 
-    switch (`${human}_${computer}`) {
-        case 'rock_scissors':
-        case 'paper_rock':
-        case 'scissors_paper':
-            humanScore ++;
-            break;
-        default:
-            computerScore ++;
-            status = "lose";
-            break;
-    }
+    winStatus(human, computer)? humanScore++ : (() => {
+        status = "lose";
+        computerScore ++});
 
     console.log(
     `Your Choice: ${human}
