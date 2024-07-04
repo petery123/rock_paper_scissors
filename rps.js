@@ -1,6 +1,9 @@
 let humanScore = 0;
 let computerScore = 0;
 
+const human = getHumanChoice();
+const computer = getComputerChoice(); 
+
 function getComputerChoice(){
     let num = Math.floor(Math.random() * 3);
     if (num === 0){
@@ -34,14 +37,12 @@ function winStatus(human, computer){
     }
 }
 
-function playRound(){
-    let human = getHumanChoice();
+function playRound(human, computer){
     if (human != "rock" && human != 'paper' && human != 'scissors'){
         alert("Invalid Entry TRY AGAIN!")
         playRound();
         return
     }
-    let computer = getComputerChoice();    
 
     console.log(
     `
