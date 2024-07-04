@@ -22,26 +22,27 @@ function winStatus(human, computer){
         case 'rock_scissors':
         case 'paper_rock':
         case 'scissors_paper':
-            return true;
+            humanScore++;
+            return "win"
+        case 'rock_rock':
+        case 'paper_paper':
+        case 'scissors_scissors':
+            return "draw"
         default:
-            computerScore ++;
-            return false;
+            computerScore++;
+            return "lose";
     }
 }
 
 function playRound(){
     let human = getHumanChoice();
-    let computer = getComputerChoice();
-    let status = "win";
-
-    winStatus(human, computer)? humanScore++ : (() => {
-        status = "lose";
-        computerScore ++});
+    let computer = getComputerChoice();    
 
     console.log(
-    `Your Choice: ${human}
+    `
+    Your Choice: ${human}
     Computer Choice: ${computer}
-    You ${status} this round
+    You ${winStatus(human, computer)} this round
     YOU - COMPUTER
     ${humanScore} - ${computerScore}`)
 }
