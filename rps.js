@@ -1,3 +1,7 @@
+const rockBtn = document.getElementById("rockBtn");
+const paperBtn = document.getElementById("paperBtn");
+const scissorsBtn = document.getElementById("scissorsBtn");
+
 function getComputerChoice(){
     let num = Math.floor(Math.random() * 3);
     if (num === 0){
