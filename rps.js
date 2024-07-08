@@ -1,9 +1,5 @@
 const buttons = document.querySelector(".buttons");
 
-const rockBtn = document.querySelector("#rockBtn");
-const paperBtn = document.querySelector("#paperBtn");
-const scissorsBtn = document.querySelector("#scissorsBtn");
-
 const roundWinner = document.querySelector("#roundWinner");
 const userBoard = document.querySelector("#userBoard");
 const computerBoard = document.querySelector("#computerBoard");
