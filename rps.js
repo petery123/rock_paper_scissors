@@ -5,27 +5,27 @@ const paperBtn = document.querySelector("#paperBtn");
 const scissorsBtn = document.querySelector("#scissorsBtn");
 
 const roundWinner = document.querySelector("#roundWinner");
-const overallWinner = document.querySelector("#overallWinner");
 const userBoard = document.querySelector("#userBoard");
 const computerBoard = document.querySelector("#computerBoard");
 const userPlay = document.querySelector("#userPlay");
 const computerPlay = document.querySelector("#computerPlay");
+const gameStatus = document.querySelector(".gameStatus");
+
+const overallWinner = document.createElement("p");
+overallWinner.id = "overallWinner";
 
 let userScore = 0;
 let computerScore = 0;
-let play = true;
 
 userBoard.textContent = userScore;
 computerBoard.textContent = computerScore;
 
-buttons.addEventListener("click", (event) => initiate(event));
+buttons.addEventListener("click", handlelick);
 
-function initiate(event){
-    if (play){
-        let target = event.target.id;
-        //remove 'Btn' from behind target name and runs play game function.
-        playRound(target.slice(0, -3));
-    }
+function handlelick(event){
+    let target = event.target.id;
+    //remove 'Btn' from behind target name and runs play game function.
+    playRound(target.slice(0, -3));
 }
 
 function getComputerChoice(){
@@ -42,7 +42,6 @@ function getComputerChoice(){
 function playRound(userChoice){
     let computerChoice = getComputerChoice();
     let status = winStatus(userChoice, computerChoice);
-    console.log(`User: ${userChoice} Computer: ${computerChoice}`)
 
     computerPlay.textContent = computerChoice;
     userPlay.textContent = userChoice
@@ -51,9 +50,10 @@ function playRound(userChoice){
     roundWinner.textContent = `You ${status} this round`
 
     if (userScore === 5 || computerScore === 5){
-        play = false;
-        buttons.removeEventListener("click", ((event) => initiate(event)));
+        buttons.removeEventListener("click", handlelick);
         overallWinner.textContent = userScore > computerScore? "You WIN!" : "Computer WINS!";
+        gameStatus.appendChild(overallWinner);
+        roundWinner.textContent = "GAME OVER!";
     }
 }
 
