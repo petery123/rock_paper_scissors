@@ -1,6 +1,20 @@
-const rockBtn = document.getElementById("rockBtn");
-const paperBtn = document.getElementById("paperBtn");
-const scissorsBtn = document.getElementById("scissorsBtn");
+const buttons = document.querySelector(".buttons");
+
+const rockBtn = document.querySelector("#rockBtn");
+const paperBtn = document.querySelector("#paperBtn");
+const scissorsBtn = document.querySelector("#scissorsBtn");
+
+const roundWinner = document.querySelector("#roundWinner");
+
+buttons.addEventListener("click", (event) => {
+    let target = event.target.id;
+    //remove 'Btn' from behind target name and runs play game function.
+    playRound(target.slice(0, -3));
+    
+})
+
+let humanScore = 0;
+let computerScore = 0;
 
 function getComputerChoice(){
     let num = Math.floor(Math.random() * 3);
@@ -13,67 +27,28 @@ function getComputerChoice(){
     }
 }
 
-function getHumanChoice(){
-    let choice = prompt("Enter 'rock' 'paper' or 'scissors'");
-    while (choice != "rock" && choice != 'paper' && choice != 'scissors'){
-        alert("Invalid Entry TRY AGAIN!");
-        choice = prompt("Enter 'rock' 'paper' or 'scissors'");
+function playRound(playerChoice){
+    let computerChoice = getComputerChoice();
+    let status = winStatus(playerChoice, computerChoice);
+
+    roundWinner.textContent = `You ${status} this round`
+}
+
+function winStatus(human, computer){
+    switch (`${human}_${computer}`) {
+        case 'rock_scissors':
+        case 'paper_rock':
+        case 'scissors_paper':
+            humanScore++;
+            return "win"
+        case 'rock_rock':
+        case 'paper_paper':
+        case 'scissors_scissors':
+            return "draw"
+        default:
+            computerScore++;
+            return "lose";
     }
-    return choice.toLowerCase();
 }
 
 
-
-
-function playGame(){
-    let humanScore = 0;
-    let computerScore = 0;
-
-    let human = getHumanChoice();
-    let computer = getComputerChoice();
-
-    //playRound Function
-    function playRound(human, computer){
-
-        console.log(
-        `
-        Your Choice: ${human}
-        Computer Choice: ${computer}
-        You ${winStatus(human, computer)} this round
-        YOU - COMPUTER
-        ${humanScore} - ${computerScore}`)
-    }
-
-    //WinStatus Function
-    function winStatus(human, computer){
-        switch (`${human}_${computer}`) {
-            case 'rock_scissors':
-            case 'paper_rock':
-            case 'scissors_paper':
-                humanScore++;
-                return "win"
-            case 'rock_rock':
-            case 'paper_paper':
-            case 'scissors_scissors':
-                return "draw"
-            default:
-                computerScore++;
-                return "lose";
-        }
-    }
-    
-    human = getHumanChoice();
-    computer = getComputerChoice();
-    playRound(human, computer);
-    
-
-    if (humanScore > computerScore){
-        console.log("YOU WIN!!!!")
-    } else if (humanScore < computerScore){
-        console.log("YOU LOSE!!!")
-    } else{
-        console.log("YOU DRAW :)")
-    }
-}
-
-playGame()
